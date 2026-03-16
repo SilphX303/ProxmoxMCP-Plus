@@ -1,12 +1,11 @@
 services:
   proxmox-mcp:
     build: .
+    command: ["/app/.venv/bin/python", "-m", "proxmox_mcp.server"]
     volumes:
       - /opt/proxmox-mcp/config:/app/proxmox-config:ro
     environment:
       - PROXMOX_MCP_CONFIG=/app/proxmox-config/config.json
-      - API_HOST=0.0.0.0
-      - API_PORT=8811
       - SERVICE_FQDN_PROXMOXMCP_8811
     restart: unless-stopped
     healthcheck:
