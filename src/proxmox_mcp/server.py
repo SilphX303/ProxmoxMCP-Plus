@@ -103,6 +103,8 @@ class ProxmoxMCPServer:
 
         # Initialize MCP server
         self.mcp = FastMCP("ProxmoxMCP")
+        self.mcp.settings.host = getattr(self.config.mcp, 'host', '0.0.0.0')
+        self.mcp.settings.port = int(getattr(self.config.mcp, 'port', 8811))
         self._setup_tools()
 
     def _setup_tools(self) -> None:
