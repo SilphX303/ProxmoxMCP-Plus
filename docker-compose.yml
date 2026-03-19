@@ -13,7 +13,7 @@ services:
       - SERVICE_FQDN_PROXMOXMCP_8811
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8811/health"]
+      test: ["CMD", "python", "-c", "import urllib.request;import urllib.error;exec(\"try:\\n urllib.request.urlopen('http://localhost:8811/mcp')\\nexcept urllib.error.HTTPError as e:\\n exit(0 if e.code in (405,406) else 1)\")"]
       interval: 30s
       timeout: 10s
       retries: 3
